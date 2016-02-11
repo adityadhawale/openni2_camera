@@ -38,10 +38,10 @@
 #include "openni2_camera/openni2_exception.h"
 #include "openni2_camera/openni2_convert.h"
 #include "openni2_camera/openni2_frame_listener.h"
-
+#include <iostream>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-
+#include <boost/thread/thread.hpp>
 #include <string>
 
 namespace openni2_wrapper
@@ -559,12 +559,16 @@ void OpenNI2Device::setExposure(int exposure) throw (OpenNI2Exception)
 
   if (stream)
   {
+        std::cout << "call\n";
     openni::CameraSettings* camera_settings = stream->getCameraSettings();
     if (camera_settings)
     {
+      const openni::Status rc_auto = camera_settings->setAutoExposureEnabled(true);
       const openni::Status rc = camera_settings->setExposure(exposure);
       if (rc != openni::STATUS_OK)
         THROW_OPENNI_EXCEPTION("Couldn't set exposure: \n%s\n", openni::OpenNI::getExtendedError());
+      boost::this_thread::sleep( boost::posix_time::seconds(1) );
+      const openni::Status rc_off = camera_settings->setAutoExposureEnabled(false);
     }
   }
 }
