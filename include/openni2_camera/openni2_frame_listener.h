@@ -38,7 +38,7 @@
 
 #include <vector>
 
-#include "OpenNI.h"
+#include "openni2/OpenNI.h"
 
 namespace openni2_wrapper
 {

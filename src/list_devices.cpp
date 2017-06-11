@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2014, Savioke, Inc.
+ * Copyright (c) 2016, Orbbec Ltd.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- *      Author: Stephan Wirth (wirth@savioke.com)
+ *      Author: Tim Liu (liuhua@orbbec.com)
  */
 
 /**
@@ -35,8 +36,8 @@
  */
 
 #include <iostream>
-#include "openni2_camera/openni2_device_manager.h"
-#include "openni2_camera/openni2_exception.h"
+#include <openni2_camera/openni2_device_manager.h>
+#include <openni2_camera/openni2_exception.h>
 
 using openni2_wrapper::OpenNI2DeviceManager;
 using openni2_wrapper::OpenNI2DeviceInfo;
