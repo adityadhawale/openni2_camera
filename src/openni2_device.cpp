@@ -29,7 +29,7 @@
  *      Author: Julius Kammerl (jkammerl@willowgarage.com)
  */
 
-#include "openni2/OpenNI.h"
+#include <OpenNI.h>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
@@ -529,6 +529,7 @@ void OpenNI2Device::setAutoExposure(bool enable) throw (OpenNI2Exception)
     openni::CameraSettings* camera_seeting = stream->getCameraSettings();
     if (camera_seeting)
     {
+      std::cout << "Auto: " << enable << std::endl;
       const openni::Status rc = camera_seeting->setAutoExposureEnabled(enable);
       if (rc != openni::STATUS_OK)
         THROW_OPENNI_EXCEPTION("Couldn't set auto exposure: \n%s\n", openni::OpenNI::getExtendedError());
@@ -562,9 +563,14 @@ void OpenNI2Device::setExposure(int exposure) throw (OpenNI2Exception)
     openni::CameraSettings* camera_settings = stream->getCameraSettings();
     if (camera_settings)
     {
+      std::cout << "Exposure: "<< exposure << std::endl;
+      // std::cout << "Exposure: "<< exposure << std::endl;
+      const openni::Status rc_auto = camera_settings->setAutoExposureEnabled(true);
       const openni::Status rc = camera_settings->setExposure(exposure);
       if (rc != openni::STATUS_OK)
         THROW_OPENNI_EXCEPTION("Couldn't set exposure: \n%s\n", openni::OpenNI::getExtendedError());
+
+      // const openni::Status rc_auto_off = camera_settings->setAutoExposureEnabled(false);
     }
   }
 }

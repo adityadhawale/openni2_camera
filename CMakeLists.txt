@@ -41,11 +41,12 @@ catkin_package(
 )
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR}/openni2/Redist)
-
+message(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(include
                     ${catkin_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_BINARY_DIR}/openni2/include
+                    ${CMAKE_CURRENT_BINARY_DIR}/astra_openni2/src/astra_openni2/Include
                     )
 
 
