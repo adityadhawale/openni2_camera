@@ -118,7 +118,8 @@ private:
   /** \brief reconfigure server*/
   boost::shared_ptr<ReconfigureServer> reconfigure_server_;
   bool config_init_;
-
+  int exp_ = 0;
+  bool initialized = false;
   boost::mutex connect_mutex_;
   // published topics
   image_transport::CameraPublisher pub_color_;

@@ -40,7 +40,7 @@
 
 namespace openni2_wrapper
 {
-
+  
 OpenNI2Driver::OpenNI2Driver(ros::NodeHandle& n, ros::NodeHandle& pnh) :
     nh_(n),
     pnh_(pnh),
@@ -191,6 +191,7 @@ void OpenNI2Driver::configCb(Config &config, uint32_t level)
   auto_exposure_ = config.auto_exposure;
   auto_white_balance_ = config.auto_white_balance;
   exposure_ = config.exposure;
+  exp_ = exposure_;
 
   use_device_time_ = config.use_device_time;
 
@@ -433,6 +434,12 @@ void OpenNI2Driver::newColorFrameCallback(sensor_msgs::ImagePtr image)
       image->header.stamp = image->header.stamp + color_time_offset_;
 
       pub_color_.publish(image, getColorCameraInfo(image->width, image->height, image->header.stamp));
+      if(!initialized)
+        {
+          device_->setExposure(exp_);
+          initialized = true;
+        }
+      
     }
   }
 }
